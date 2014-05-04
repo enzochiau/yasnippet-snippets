@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: UVM component include package
+# --
+\`ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension
+(buffer-file-name))))`__SV}
+\`define $1
+
+package ${2:`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`};
+   import uvm_pkg::*;
+ \`include "uvm_macros.svh"
+
+   $0
+
+endpackage : $2
+
+\`endif //  \`ifndef $1
