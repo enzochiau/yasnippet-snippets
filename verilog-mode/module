@@ -3,6 +3,6 @@
 # key: module
 # --
 
-module $1($0);
-
+module $1($2);
+  $0
 endmodule : $1
