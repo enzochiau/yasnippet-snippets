@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: task
+# key: task
+# --
+task $1($2);
+   $0
+endtask : $1
