@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: run_phase
+# key: runp
+# --
+task run_phase(uvm_phase phase);
+   $0
+endtask : run_phase

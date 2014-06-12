@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: report_phase
+# key: reportp
+# --
+function void report_phase(uvm_phase phase);
+   $0
+endfunction : report_phase

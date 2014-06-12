@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: connect_phase
+# key: connectp
+# --
+function void connect_phase(uvm_phase phase);
+   $0
+endfunction : connect_phase

@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: build_phase
+# key: buildp
+# --
+function void build_phase(uvm_phase phase);
+   $0
+endfunction : build_phase
