@@ -1,0 +1,13 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: convert2string
+# key: convert2string
+# --
+function string convert2string();
+   string s;
+
+   s = super.convert2string();
+
+   $sformat(s, "%s\n $1", $2);
+   $0
+   return s;
+endfunction : convert2string
