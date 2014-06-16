@@ -1,0 +1,16 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: do_copy
+# key: do_copy
+# --
+function void do_copy(uvm_object rhs);
+   $1 rhs_;
+
+   if(!$cast(rhs_, rhs)) begin
+      uvm_report_error("do_copy:", "Cast failed");
+      return;
+   end
+
+   super.do_copy(rhs); // Chain the copy with parent classes
+
+   $0
+endfunction: do_copy
