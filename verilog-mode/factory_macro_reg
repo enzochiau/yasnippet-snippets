@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: factory_macro_reg
+# key: factorymr
+# --
+\`uvm_${1:$$(yas-choose-value '("component" "object"))}${2:$$(yas-choose-value '("" "_param"))}_utils_begin($3)
+   $0
+\`uvm_$1_utils_end

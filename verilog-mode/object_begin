@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: object_begin
+# key: objectmb
+# --
+\`uvm_object_utils_begin($1)
+   $0
+\`uvm_object_utils_end

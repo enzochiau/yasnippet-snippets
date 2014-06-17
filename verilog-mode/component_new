@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: component_new
+# key: newc
+# --
+function new(string name = "$1", uvm_component parent);
+   super.new(name, parent);
+   $0
+endfunction : new

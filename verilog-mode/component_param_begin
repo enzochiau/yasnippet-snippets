@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: component_param_begin
+# key: componentmpb
+# --
+\`uvm_component_param_utils_begin($1)
+   $0
+\`uvm_component_utils_end

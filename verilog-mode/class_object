@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: class_object
+# key: clsobj
+# --
+class $1 extends $2;
+   $0
+
+   function new(string name = "$1");
+      super.new(name);
+   endfunction: new
+
+endclass : $1
