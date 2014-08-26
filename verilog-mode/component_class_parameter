@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: component_class_parameter
+# key: cpntclsp
+# --
+class ${1: $(file-name-base)} #($2) extend $3;
+   $0
+
+   `uvm_component_param_utils($1#($4))
+
+   function new(string name, uvm_component parent);
+      super.new(name, parent);
+   endfunction : new
+
+endclass : $1
