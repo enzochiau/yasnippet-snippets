@@ -3,8 +3,8 @@
 # key: uvc_pkg
 # --
 
-\`ifndef ${1:$(upcase yas-text)}}__SV
-\`define ${1:$(upcase yas-text)}}__SV
+\`ifndef ${1:$(upcase yas-text)}__SV
+\`define ${1:$(upcase yas-text)}__SV
 
 package ${1:`(get-buffer-name)`};
    $0
@@ -21,4 +21,4 @@ package ${1:`(get-buffer-name)`};
 
 endpackage : $1
 
-\`endif // \`ifndef ${1:$(upcase yas-text)}}__SV
+\`endif // \`ifndef ${1:$(upcase yas-text)}__SV
