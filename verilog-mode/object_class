@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: object_class
+# key: objcls
+# --
+class ${1: $(file-name-base)} extend $2;
+   $0
+
+   `uvm_object_utils($1)
+
+   function new(string name = "$1");
+      super.new(name);
+   endfunction : new
+
+endclass : $1
