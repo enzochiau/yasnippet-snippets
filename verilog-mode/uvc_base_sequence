@@ -1,0 +1,31 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: UVC base sequence
+# key: uvc_base_seq
+# --
+// basic sequence (calls an item)
+class ${1:name}_base_seq extends uvm_sequence#($1_item);
+
+   \`uvm_object_utils($1_base_seq)
+
+   string scope_name = "";
+
+   // Get data_width from config
+   $1_config m_config;
+
+   // declare a p_sequencer pointer to sequencer (optional if needed)
+   // \`uvm_declare_p_sequencer(uvm_sequencer#(ctu_item #(P_DWIDTH)))
+
+   function new(string name = "$1_base_seq");
+      super.new(name);
+   endfunction : new
+
+   task pre_body();
+      if(starting_phase != null)
+        starting_phase.raise_objection(this,get_type_name());
+   endtask :  pre_body
+
+   task post_body();
+      if(starting_phase != null)
+        starting_phase.drop_objection(this,get_type_name());
+   endtask :  post_body
+endclass : $1_base_seq
