@@ -1,0 +1,72 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: UVC abstract interface
+# key: uvc_abs_if
+# --
+interface ${1:name}_if #(parameter string proc="$1"${2:, parameter int P_DWIDTH = 15})
+   (input bit clk, input bit rst);
+
+   import $1_abstract_pkg::*;
+
+   $0
+   
+   // bit [P_DWIDTH-1:0] din;
+   // bit                dinVld;
+   // bit                dc;
+
+class concrete_c extends $1_abstract_c;
+   function new(string name="");
+      super.new(name);
+   endfunction : new
+
+   // Wait for signals
+   task wait_for_reset();
+      if (!rst)
+        @(posedge rst);
+   endtask : wait_for_reset
+
+   task wait_for_reset_release();
+      if (rst)
+        @(negedge rst);
+   endtask : wait_for_reset_release
+
+   task wait_for_clock(int n=1);
+      repeat(n)
+        @(posedge clk);
+   endtask : wait_for_clock
+
+   task reset_signals();
+      // dinVld <= 0;
+      // din    <= 0;
+      // dc     <= 0;
+      wait_for_reset;
+      @(posedge clk);
+      wait_for_reset_release;
+   endtask : reset_signals
+
+   // task write(int data);
+   //    // dinVld <= 1;
+   //    // din    <= data;
+   //    // dc     <= is_dc;
+   //    // @(posedge clk);
+   //    // dinVld <= 0;
+   //    // dc     <= 0;
+   // endtask : write
+   // 
+   // task read(int data);
+   //    // dinVld <= 1;
+   //    // din    <= data;
+   //    // dc     <= is_dc;
+   //    // @(posedge clk);
+   //    // dinVld <= 0;
+   //    // dc     <= 0;
+   // endtask : read
+
+endclass
+
+   concrete_c concrete_inst;
+   function $1_abstract_c get_concrete_c_inst();
+      concrete_inst=new(proc);
+      return concrete_inst;
+   endfunction // get_concrete_c_inst
+
+endinterface : $1_if
