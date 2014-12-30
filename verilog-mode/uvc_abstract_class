@@ -1,0 +1,17 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: UVC abstract class
+# key: uvc_abs_cls
+# --
+virtual class ${1:name}_abstract_c extends uvm_object;
+
+   function new(string name);
+      super.new(name);
+   endfunction : new
+
+   pure virtual task wait_for_reset();
+   pure virtual task wait_for_clock(int n);
+   pure virtual task reset_signals();
+   // pure virtual task write(int data);
+   // pure virtual task read(int date);
+
+endclass : $1_abstract_c
