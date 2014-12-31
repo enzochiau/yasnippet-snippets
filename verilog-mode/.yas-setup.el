@@ -15,4 +15,10 @@
   (string-match "\\(.*\\)_\\(agent\\|env\\)_pkg" s)
   (match-string 1 s))
 
-  
+
+(defun get-buffer-prefix ()
+  "Get the prefix of buffer name"
+  (setq s (substring-no-properties (get-buffer-name)))
+  (string-match "\\(.*?\\)" s)
+  (match-string 1 s))
+
