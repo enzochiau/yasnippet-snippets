@@ -2,7 +2,7 @@
 # name: UVC abstract class
 # key: uvc_abs_cls
 # --
-virtual class ${1:name}_abstract_c extends uvm_object;
+virtual class ${1:`(get-pkg-name (get-buffer-name))`}_abstract_c extends uvm_object;
 
    function new(string name);
       super.new(name);
@@ -12,7 +12,7 @@ virtual class ${1:name}_abstract_c extends uvm_object;
    pure virtual task wait_for_clock(int n);
    pure virtual task reset_signals();
    $0
-   // pure virtual task write(int data);
-   // pure virtual task read(int date);
+   // pure virtual task write();
+   // pure virtual task read();
 
 endclass : $1_abstract_c

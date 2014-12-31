@@ -2,7 +2,7 @@
 # name: UVC sequence
 # key: uvc_seq
 # --
-class ${1:name}_sequence extends $1_base_seq;
+class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends $1_base_seq;
 
    \`uvm_object_utils($1_sequence)
 
