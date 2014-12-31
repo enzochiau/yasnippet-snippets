@@ -1,0 +1,106 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: UVM sequence item
+# key: uvc_seq_item
+# --
+
+\`ifndef ${1:$(upcase yas-text)}_ITEM__SV
+\`define ${1:$(upcase yas-text)}_ITEM__SV
+
+class ${1:name}_item extends uvm_sequence_item;
+
+   \`uvm_object_utils($1_item)
+
+   $0
+   
+   // rand int unsigned ctu_size = 32;
+   // rand int unsigned transmit_delay;
+   // 
+   // rand int unsigned data[64*64];
+
+
+   function new(string name="$1_item");
+      super.new(name);
+   endfunction : new
+
+   function string convert2string();
+      string       s;
+      // int unsigned size = ctu_size**2;
+      
+      s = super.convert2string();
+
+      // $sformat(s, "%s\n CTU Size      : %d", s, ctu_size);
+      // $sformat(s, "%s\n Transmit Delay: %d", s, transmit_delay);
+      // 
+      // if (size > 8) begin
+      //    // Print maximum 8 data: 4 at beginning, 4 at the end
+      //    for(int i=0; i<4; i++)
+      //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
+      // 
+      //    $sformat(s, "%s\n ... ", s);
+      // 
+      //    for(int i=size-4; i<size; i++)
+      //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
+      // end
+      // else begin
+      //    for (int i=0; i<size; i++)
+      //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
+      // end // else: !if(size > 8)
+      
+      return s;
+   endfunction : convert2string
+
+   function void do_print(uvm_printer printer);
+      if(printer.knobs.sprint == 0) begin
+         $display(convert2string());
+      end
+      else begin
+         printer.m_string = convert2string();
+      end
+   endfunction: do_print
+
+   function void do_copy(uvm_object rhs);
+      $1_item rhs_;
+      if (!$cast(rhs_, rhs))
+        \`uvm_fatal("$1_item", "Type Mismatch")
+      super.do_copy(rhs);
+      // ctu_size        = rhs_.ctu_size;
+      // transmit_delay  = rhs_.transmit_delay;
+      // for(int i=0; i<ctu_size**2; i++) begin
+      //    data[i]  = rhs_.data[i];
+      // end
+   endfunction : do_copy
+
+   function void do_record(uvm_recorder recorder);
+      // int unsigned data_width = $bits(data[0]);
+      // \`uvm_record_int("transmit_delay", transmit_delay, $bits(transmit_delay), UVM_UNSIGNED)
+      // \`uvm_record_int("ctu_size",       ctu_size,       $bits(ctu_size),       UVM_UNSIGNED)
+      // for(int i=0; i<ctu_size**2; i++) begin
+      //    \`uvm_record_int($sformatf("data[%d]", i), data[i], data_width, UVM_HEX)
+      // end
+   endfunction : do_record
+
+
+   // do_compare implementation:
+   function bit do_compare(uvm_object rhs, uvm_comparer comparer);
+      $1_item rhs_;
+      bit compare_result = 0;
+
+      // If the cast fails, comparison has also failed
+      // A check for null is not needed because that is done in the compare()
+      // function which calls do_compare()
+      if(!$cast(rhs_, rhs)) begin
+         return compare_result;
+      end
+
+      compare_result = super.do_compare(rhs, comparer);
+      // compare_result = (compare_result==1) && (ctu_size == rhs_.ctu_size);
+      // 
+      // for(int i=0; i<ctu_size**2; i++)
+      //   compare_result  = (compare_result == 1) && (data[i] == rhs_.data[i]);
+
+      return compare_result;
+   endfunction : do_compare
+
+endclass : $1_item
+
+\`endif //  \`ifndef ${1:$(upcase yas-text)}_ITEM__SV
