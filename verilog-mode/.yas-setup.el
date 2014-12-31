@@ -12,8 +12,9 @@
 (defun get-pkg-name ()
   "Get the package name from string."
   (setq s (substring-no-properties (get-buffer-name)))
-  (string-match "\\(.*\\)_\\(agent\\|env\\|item\|config\\|if\\abstract\\|sequence.?\\)\\(_pkg\\|\\)" s)
+  (string-match "\\(.*\\)_\\(agent\\|env\\|item\|config\\|if\\|abstract\\|sequence.?\\)\\(_pkg\\|_c\\|\\)" s)
   (match-string 1 s))
+
 
 (defun get-buffer-prefix ()
   "Get the prefix of buffer name"
