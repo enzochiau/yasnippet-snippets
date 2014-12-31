@@ -11,13 +11,13 @@ package ${1:`(get-buffer-name)`};
    import uvm_pkg::*;
  \`include "uvm_macros.svh"
  
- \`include ${1:$(get-pkg-name yas-text)}_item.svh
- \`include ${1:$(get-pkg-name yas-text)}_config.svh
- \`include ${1:$(get-pkg-name yas-text)}_monitor.svh
- \`include ${1:$(get-pkg-name yas-text)}_driver.svh
- \`include ${1:$(get-pkg-name yas-text)}_sequencer.svh
- \`include ${1:$(get-pkg-name yas-text)}_sequence.svh
- \`include ${1:$(get-pkg-name yas-text)}_agent.svh
+// \`include "${1:$(get-pkg-name yas-text)}_item.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_config.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_monitor.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_driver.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_sequencer.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_sequence.svh"
+// \`include "${1:$(get-pkg-name yas-text)}_agent.svh"
 
 endpackage : $1
 
