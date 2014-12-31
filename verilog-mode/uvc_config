@@ -1,0 +1,27 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: 
+# key: 
+# binding: direct-keybinding
+# --
+
+\`ifndef ${1:$(upcase yas-text)}_CONFIG__SV
+ \`define ${1:$(upcase yas-text)}_CONFIG__SV
+
+class ${1:`(get-buffer-prefix)`}_config extends uvm_object;
+
+   \`uvm_object_utils($1_config)
+
+   virtual $1_if vif;
+   uvm_active_passive_enum is_active;
+
+   // int unsigned $1_size = 32;
+   // int unsigned pixel_width = 8;
+   // int unsigned num_of_pixel_per_trans = 2;
+   
+   function new(string name = "");
+      super.new(name);
+   endfunction
+
+endclass : $1_config
+
+\`endif // $1_CONFIG__SV
