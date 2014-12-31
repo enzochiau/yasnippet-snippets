@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVM sequence item
 # key: uvc_seq_item
+# group: UVC
 # --
 
 \`ifndef ${1:$(upcase yas-text)}_ITEM__SV
