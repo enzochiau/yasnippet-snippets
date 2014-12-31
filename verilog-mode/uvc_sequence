@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVC sequence
 # key: uvc_seq
+# group: UVC
 # --
 class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends $1_base_seq;
 

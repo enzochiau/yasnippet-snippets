@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVM component abstract package 
 # key: uvc_abs_pkg
+# group: UVC
 # --
 \`ifndef ${1:$(upcase yas-text)}_ABSTRACT_PKG__SV
   \`define ${1:$(upcase yas-text)}_ABSTRACT_PKG__SV

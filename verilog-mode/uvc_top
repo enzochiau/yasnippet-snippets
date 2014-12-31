@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: Top module of UVM testbench
 # key: uvc_top
+# group: UVC
 # --
 
 module ${1:`(get-buffer-name)`};

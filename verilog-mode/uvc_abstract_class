@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVC abstract class
 # key: uvc_abs_cls
+# group: UVC
 # --
 virtual class ${1:`(get-pkg-name (get-buffer-name))`}_abstract_c extends uvm_object;
 

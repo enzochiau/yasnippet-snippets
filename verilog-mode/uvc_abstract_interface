@@ -1,8 +1,9 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVC abstract interface
 # key: uvc_abs_if
+# group: UVC
 # --
-interface ${1:`(get-pkg-name (get-buffer-name))`}_if #(parameter string proc="$1"${2:, parameter int P_DWIDTH = 15})
+interface ${1:`(get-pkg-name (get-buffer-name))`}_if #(string P_PROC="$1"${2:, int P_DWIDTH = 15})
    (input bit clk, input bit rst);
 
    import $1_abstract_pkg::*;
@@ -65,7 +66,7 @@ endclass
 
    concrete_c concrete_inst;
    function $1_abstract_c get_concrete_c_inst();
-      concrete_inst=new(proc);
+      concrete_inst=new(P_PROC);
       return concrete_inst;
    endfunction // get_concrete_c_inst
 

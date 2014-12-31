@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVM component configuration
 # key: uvc_cfg
+# group: UVC
 # --
 
 \`ifndef ${1:$(upcase yas-text)}_CONFIG__SV
