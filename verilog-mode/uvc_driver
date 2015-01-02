@@ -98,6 +98,6 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
       // m_config.wait_for_clock(tr.transmit_delay);
    endtask : send_to_dut
 
-endclass : ${1:$(upcase yas-text)}_driver
+endclass : $1_driver
 
-\`endif
+\`endif // ${1:$(upcase yas-text)}_DRIVER__SV
