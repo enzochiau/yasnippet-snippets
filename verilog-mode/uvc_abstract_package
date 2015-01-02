@@ -4,7 +4,7 @@
 # group: UVC
 # --
 \`ifndef ${1:$(upcase yas-text)}_ABSTRACT_PKG__SV
-  \`define ${1:$(upcase yas-text)}_ABSTRACT_PKG__SV
+\`define ${1:$(upcase yas-text)}_ABSTRACT_PKG__SV
 
 package ${1:`(get-pkg-name (get-buffer-name))`}_abstract_pkg;
    

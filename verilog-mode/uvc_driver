@@ -11,7 +11,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
 
    \`uvm_component_utils($1_driver)
 
-   $1_config m_config;
+   $1_config cfg;
 
    virtual $1_if vif;
    
@@ -23,14 +23,14 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
       super.build_phase(phase);
 
       // Get $1_config
-      if(!uvm_config_db#($1_config)::get(this, "", "$1_config", m_config))
+      if(!uvm_config_db#($1_config)::get(this, "", "$1_config", cfg))
         \`uvm_fatal("build", {"$1 configuration is not set: ", get_full_name(),".$1_config"})
 
    endfunction : build_phase
 
    function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
-      vif = m_config.vif;
+      vif = cfg.vif;
    endfunction : connect_phase
 
    task run_phase(uvm_phase phase);
@@ -81,21 +81,21 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
 
       // while (i<tr.$1_size**2) begin
       //    vif.din = '0;
-      //    for (int j=0; j<m_config.num_of_pixel_per_trans; j++) begin
-      //       vif.din = vif.din << m_config.pixel_width;
-      //       for (int m=0; m<m_config.pixel_width; m++) 
+      //    for (int j=0; j<cfg.num_of_pixel_per_trans; j++) begin
+      //       vif.din = vif.din << cfg.pixel_width;
+      //       for (int m=0; m<cfg.pixel_width; m++) 
       //         vif.din[m] =  tr.data[i][m];
       //       i++;
       //    end
       //    vif.dinVld = 1;
       //    vif.we = 1;
-      //    m_config.wait_for_clock();
+      //    cfg.wait_for_clock();
       // end
       // 
       // vif.dinVld = 0;
       // vif.we     = 0;
       // 
-      // m_config.wait_for_clock(tr.transmit_delay);
+      // cfg.wait_for_clock(tr.transmit_delay);
    endtask : send_to_dut
 
 endclass : $1_driver

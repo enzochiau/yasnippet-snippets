@@ -12,7 +12,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_monitor extends uvm_monitor;
   \`uvm_component_utils($1_monitor)
 
   virtual $1_if vif;
-  $1_config m_config;
+  $1_config cfg;
 
   // The following two bits are used to control whether checks and coverage are
   // done both in the monitor class and the interface.
@@ -68,28 +68,27 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_monitor extends uvm_monitor;
   // new - constructor
   function new (string name, uvm_component parent);
     super.new(name, parent);
-    cov_trans = new();
-    cov_trans.set_inst_name({get_full_name(), ".cov_trans"});
-    cov_trans_beat = new();
-    cov_trans_beat.set_inst_name({get_full_name(), ".cov_trans_beat"});
+    // cov_trans = new();
+    // cov_trans.set_inst_name({get_full_name(), ".cov_trans"});
+    // cov_trans_beat = new();
+    // cov_trans_beat.set_inst_name({get_full_name(), ".cov_trans_beat"});
     trans_collected = new();
     item_collected_port = new("item_collected_port", this);
   endfunction : new
 
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if(!uvm_config_db#($1_config)::get(this, "", "$1_config", m_config))
+    if(!uvm_config_db#($1_config)::get(this, "", "$1_config", cfg))
        \`uvm_fatal("build",{"Config must be set for: ",get_full_name(),".$1_config"});
   endfunction: build_phase
 
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
-    vif = m_config.vif;
+    vif = cfg.vif;
   endfunction: connect_phase
   
   // run phase
   virtual task run_phase(uvm_phase phase);
-    \`uvm_info({get_full_name()," MASTER ID"},$sformatf(" = %0d",master_id),UVM_MEDIUM)
     fork
       collect_transactions();
     join
@@ -186,8 +185,8 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_monitor extends uvm_monitor;
   // endfunction : perform_transfer_coverage
 
   virtual function void report_phase(uvm_phase phase);
-    \`uvm_info(get_full_name(),$sformatf("Covergroup 'cov_trans' coverage: %2f",
-					cov_trans.get_inst_coverage()),UVM_LOW)
+    // \`uvm_info(get_full_name(),$sformatf("Covergroup 'cov_trans' coverage: %2f",
+	// 				cov_trans.get_inst_coverage()),UVM_LOW)
   endfunction
 
 endclass : $1_monitor

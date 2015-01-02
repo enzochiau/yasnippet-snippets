@@ -62,7 +62,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
    function void do_copy(uvm_object rhs);
       $1_item rhs_;
       if (!$cast(rhs_, rhs))
-        \`uvm_fatal("$1_item", "Type Mismatch")
+        \`uvm_fatal("DO_COPY", "Type Mismatch")
       super.do_copy(rhs);
       // $1_size        = rhs_.$1_size;
       // transmit_delay  = rhs_.transmit_delay;
@@ -90,7 +90,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
       // A check for null is not needed because that is done in the compare()
       // function which calls do_compare()
       if(!$cast(rhs_, rhs)) begin
-         return compare_result;
+         \`uvm_fatal("DO_COMPARE", "Type mismatch")
       end
 
       compare_result = super.do_compare(rhs, comparer);

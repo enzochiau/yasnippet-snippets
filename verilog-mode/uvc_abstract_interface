@@ -3,6 +3,10 @@
 # key: uvc_abs_if
 # group: UVC
 # --
+
+\`ifndef ${1:$(upcase yas-text)}_INTERFACE__SV
+\`define ${1:$(upcase yas-text)}_INTERFACE__SV
+
 interface ${1:`(get-pkg-name (get-buffer-name))`}_if #(string P_PROC="$1"${2:, int P_DWIDTH = 15})
    (input bit clk, input bit rst);
 
@@ -36,31 +40,31 @@ class concrete_c extends $1_abstract_c;
    endtask : wait_for_clock
 
    task reset_signals();
+      wait_for_reset;
       // dinVld <= 0;
       // din    <= 0;
       // dc     <= 0;
-      wait_for_reset;
       @(posedge clk);
       wait_for_reset_release;
    endtask : reset_signals
 
-   // task write(int data);
-   //    // dinVld <= 1;
-   //    // din    <= data;
-   //    // dc     <= is_dc;
-   //    // @(posedge clk);
-   //    // dinVld <= 0;
-   //    // dc     <= 0;
-   // endtask : write
-   // 
-   // task read(int data);
-   //    // dinVld <= 1;
-   //    // din    <= data;
-   //    // dc     <= is_dc;
-   //    // @(posedge clk);
-   //    // dinVld <= 0;
-   //    // dc     <= 0;
-   // endtask : read
+   task write(int data);
+      // dinVld <= 1;
+      // din    <= data;
+      // dc     <= is_dc;
+      // @(posedge clk);
+      // dinVld <= 0;
+      // dc     <= 0;
+   endtask : write
+   
+   task read(int data);
+      // dinVld <= 1;
+      // din    <= data;
+      // dc     <= is_dc;
+      // @(posedge clk);
+      // dinVld <= 0;
+      // dc     <= 0;
+   endtask : read
 
 endclass
 
@@ -71,3 +75,5 @@ endclass
    endfunction // get_concrete_c_inst
 
 endinterface : $1_if
+
+\`endif // \`ifndef ${1:$(upcase yas-text)}_INTERFACE__SV

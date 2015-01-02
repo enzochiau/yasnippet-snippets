@@ -26,26 +26,15 @@ module ${1:`(get-buffer-name)`};
    bit clk;
    bit rst;
 
-   // typedef virtual macro_coding_unit_if#(P_DIN_WIDTH, "mcu") macro_coding_unit_vif_t;
-   // typedef virtual start_of_frame_if      start_of_frame_vif_t;
 
-   // macro_coding_unit_if #(P_DIN_WIDTH, "mcu") macro_coding_unit_if_0(clk, rst);
-   // start_of_frame_if                          start_of_frame_if_0(clk, rst);
+   ${5:pkg}_if $5_if_0(clk, rst);
 
    initial begin
-      // uvm_config_db#(macro_coding_unit_abstract_c)::set(null,
-      //                                                   "uvm_test_top",
-      //                                                   "macro_coding_unit_vif",
-      //                                                   macro_coding_unit_if_0.get_concrete_c_inst());
-      // uvm_config_db#(start_of_frame_vif_t)::set(null,
-      //                                           "uvm_test_top",
-      //                                           "start_of_frame_vif",
-      //                                           start_of_frame_if_0);
-      // begin
-      //    uvm_component c;
-      //    c = uvm_root::get();
-      //    c.set_report_id_action_hier("ILLEGALNAME",UVM_NO_ACTION);
-      // end
+      uvm_config_db#(virtual $5_if)::set(null,
+                                         "uvm_test_top",
+                                         "$5_if",
+                                         $5_if_0);
+
       uvm_root::get().set_report_id_action_hier("ILLEGALNAME",UVM_NO_ACTION);
       run_test();
    end
@@ -61,66 +50,6 @@ module ${1:`(get-buffer-name)`};
       #(5*P_CLK_PERIOD);
       rst = 0;
    end
-
-
-   // <TODO> Drive signals properly
-   // instantiate and connect dut to interface(s) here
-   // jpeg_encoder #(
-   //                .G_DIN_WIDTH              (P_DIN_WIDTH              ),
-   //                .G_DOUT_WIDTH             (P_DOUT_WIDTH             ),
-   //                .G_ROWS_WIDTH             (P_ROWS_WIDTH             ),
-   //                .G_COLS_WIDTH             (P_COLS_WIDTH             ),
-   //                .G_HUFF_TABLE_INDEX_WIDTH (P_HUFF_TABLE_INDEX_WIDTH ),
-   //                .G_Q_TABLE_INDEX_WIDTH    (P_Q_TABLE_INDEX_WIDTH    ),
-   //                .G_HUFF_HEADER_ADDR_WIDTH (P_HUFF_HEADER_ADDR_WIDTH ),
-   //                .G_BIT_DEPTH_WIDTH        (P_BIT_DEPTH_WIDTH        ),
-   //                .G_BYTE_CNT_WIDTH         (P_BYTE_CNT_WIDTH         ))
-   // DUT(.clk             ( clk                                              ),
-   //     .rst             ( rst                                              ),
-   //     .sof             ( start_of_frame_if_0.sof ),
-   //     .bitDepth        ( P_BIT_DEPTH ),
-   //     .dinVld          ( macro_coding_unit_if_0.dinVld                                      ),
-   //     .din             ( macro_coding_unit_if_0.din                       ),
-   //     .dc              ( macro_coding_unit_if_0.dc),
-   //     .rows            ( P_ROWS ),
-   //     .cols            ( P_COLS ),
-   //     .huffTblIdx      ( 3'b0 ),
-   //     .huffTblAddr     ( huffTblAddr  ),
-   //     .huffCode        ( huffCodeLen[20:5]  ),
-   //     .huffLen         ( huffCodeLen[4:0]  ),
-   //     .qTblIdx         ( 3'b0 ),
-   //     .qDin            ( 8'b0  ),
-   //     .addrQTbl        (   ),
-   //     .huffStartAddr   ( P_HUFF_HEADER_START_ADDR ),
-   //     .huffEndAddr     ( P_HUFF_HEADER_END_ADDR ),
-   //     .huffDin         ( huffDin       ),
-   //     .huffHeaderAddr  ( huffHeaderAddr       ),
-   //     .dout(),
-   //     .doutVld(),
-   //     .byteCnt(),
-   //     .byteCntVld(),
-   //     .o_early_sof_err (),
-   //     .o_buff_overflow ()
-   //     );
-   // 
-   // single_port_distributed_rom #(.G_AWIDTH(P_HUFF_HEADER_ADDR_WIDTH-3),
-   //                               .G_DWIDTH(8),
-   //                               .G_MIF("HuffmanHeaderTable.mif"))
-   // uHUFF_HEADER_TBL(.clk (clk),
-   //                  .en(1'b1),
-   //                  .addr(huffHeaderAddr[P_HUFF_HEADER_ADDR_WIDTH-4:0]),
-   //                  .data(huffDin),
-   //                  .doutVld());
-   // 
-   // single_port_distributed_rom #(.G_AWIDTH(8),
-   //                               .G_DWIDTH(21),
-   //                               .G_MIF("HuffmanEncodingTable.mif"))
-   // uHUFF_ENCODING_TBL(.clk (clk),
-   //                  .en(1'b1),
-   //                  .addr(huffTblAddr[7:0]),
-   //                  .data(huffCodeLen),
-   //                  .doutVld());
-
 
 
 endmodule : $1
