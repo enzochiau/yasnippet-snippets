@@ -3,42 +3,14 @@
 # key: interface
 # --
 
+\`ifndef ${1:$(upcase yas-text)}_INTERFACE__SV
+\`define ${1:$(upcase yas-text)}_INTERFACE__SV
+
 interface ${1:`(get-buffer-name)`} (input bit clk,
                                     input bit rst);
 
    $0
    
-//
-// Task: wait_for_reset
-//
-// This method waits for the end of reset. 
-task wait_for_reset;
- @(negedge rst);
-endtask : wait_for_reset
- 
-//
-// Task: wait_for_clock
-//
-// This method waits for n clock cycles. 
-task wait_for_clock( int n = 1 );
- repeat(n) begin
- @( posedge clk );
- end
-endtask : wait_for_clock
- 
-//
-// Task: wait_for_error
-//
-// task wait_for_error;
-//  @(posedge error);
-// endtask: wait_for_error
- 
-//
-// Task: wait_for_no_error
-//
-// task wait_for_no_error;
-//  @(negedge error);
-// endtask: wait_for_no_error
-           
-
 endinterface : $1
+
+\`endif ${1:$(upcase yas-text)}_INTERFACE__SV
