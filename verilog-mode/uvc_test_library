@@ -12,7 +12,7 @@ class base_test extends uvm_test;
 
    //optional - declare tb class here or in actual test
 
-   ${1:env_name}env $1_env_0;
+   ${1:env_name}_env $1_env_0;
 
    ${2:ingress}_config $2_cfg_0;
    ${3:egress}_config $3_cfg_0;
@@ -59,7 +59,7 @@ class base_test extends uvm_test;
       $2_cfg_0           = new();
       $2_cfg_0.is_active = UVM_ACTIVE;
 
-      if (!uvm_config_db#($2_if)::get(this, "", "$2_vif", $2_cfg_0.vif))
+      if (!uvm_config_db#(virtual $2_if)::get(this, "", "$2_vif", $2_cfg_0.vif))
         \`uvm_fatal("NOVIF", {"virtual interface must be set for: ", get_full_name(),".vif"})
 
       uvm_config_db#($2_config)::set(this, "*", "$2_config", $2_cfg_0);
@@ -70,7 +70,7 @@ class base_test extends uvm_test;
       $3_cfg_0           = new();
       $3_cfg_0.is_active = UVM_ACTIVE;
 
-      if (!uvm_config_db#($3_if)::get(this, "", "$3_vif", $3_cfg_0.vif))
+      if (!uvm_config_db#(virtual $3_if)::get(this, "", "$3_vif", $3_cfg_0.vif))
         \`uvm_fatal("NOVIF", {"virtual interface must be set for: ", get_full_name(),".vif"})
 
       uvm_config_db#($3_config)::set(this, "*", "$3_config", $3_cfg_0);
