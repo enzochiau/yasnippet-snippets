@@ -1,7 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
 # name: UVM component environment
 # key: uvc_env
-# binding: direct-keybinding
+# group: UVC
 # --
 
 \`ifndef ${1:$(upcase yas-text)}_ENV__SV
