@@ -3,9 +3,9 @@
 # key: uvc_seq_base
 # group: UVC
 # --
-class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends $1_base_seq;
+class ${1:`(get-pkg-name (get-buffer-name))`}${2}_seq extends $1_base_sequence;
 
-   \`uvm_object_utils($1_sequence)
+   \`uvm_object_utils($1$2_seq)
 
    $0
    
@@ -14,7 +14,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends $1_base_seq;
 
    // pixel_sequencer up_sequencer;
 
-   function new(string name = "$1_sequence");
+   function new(string name = "$1$2_seq");
       super.new(name);
    endfunction : new
 
@@ -62,5 +62,5 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends $1_base_seq;
       //    up_sequencer.item_done();
       // end
    endtask : body
-endclass : $1_sequence
+endclass : $1$2_seq
 

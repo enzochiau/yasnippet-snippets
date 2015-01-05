@@ -3,10 +3,10 @@
 # key: uvc_base_seq
 # group: UVC
 # --
-// basic sequence (calls an item)
-class ${1:`(get-pkg-name (get-buffer-name))`}_base_seq extends uvm_sequence#($1_item);
 
-   \`uvm_object_utils($1_base_seq)
+class ${1:`(get-pkg-name (get-buffer-name))`}_base_sequence extends uvm_sequence#($1_item);
+
+   \`uvm_object_utils($1_base_sequence)
 
    string scope_name = "";
 
@@ -14,9 +14,9 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_base_seq extends uvm_sequence#($1_
    $1_config cfg;
 
    // declare a p_sequencer pointer to sequencer (optional if needed)
-   // \`uvm_declare_p_sequencer(uvm_sequencer#(ctu_item #(P_DWIDTH)))
+   // \`uvm_declare_p_sequencer(uvm_sequencer#($1_item))
 
-   function new(string name = "$1_base_seq");
+   function new(string name = "$1_base_sequence");
       super.new(name);
    endfunction : new
 
@@ -29,4 +29,4 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_base_seq extends uvm_sequence#($1_
       if(starting_phase != null)
         starting_phase.drop_objection(this,get_type_name());
    endtask :  post_body
-endclass : $1_base_seq
+endclass : $1_base_sequence
