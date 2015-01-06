@@ -12,7 +12,7 @@
 (defun get-pkg-name (name)
   "Get the package name from string."
   (setq s (substring-no-properties name))
-  (string-match "\\(.*\\)_\\(agent\\|env\\|item\|config\\|driver\\|monitor\\|if\\|abstract\\|sequence.?\\|base_sequence\\)\\(_pkg\\|_c\\|\\)" s)
+  (string-match "\\(.*\\)_\\(agent\\|env\\|item\|config\\|driver\\|monitor\\|if\\|abstract\\|sequence.?\\|base_sequence\\|seq_lib|\\test_lib\\)\\(_pkg\\|_c\\|\\)" s)
   (match-string 1 s))
 
 
