@@ -1,0 +1,23 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: VHDL Header
+# key: header
+# --
+-------------------------------------------------------------------------------
+--
+--            Copyright (c) `(format-time-string "%Y")` Blackmagic Design Pty. Ltd.
+--                 11 Gateway Court, Port Melbourne
+--                       Victoria, Australia
+--
+-------------------------------------------------------------------------------
+-- Project       : $1
+-- Author        : `user-full-name` <`user-mail-address`>
+-- File Name     : `(buffer-name)`
+-- Created       : `(format-time-string "%Y-%m-%d")`
+-- Last Modified : `(format-time-string "%Y-%m-%d")`
+-------------------------------------------------------------------------------
+-- Description:
+-- $2
+-- 
+-------------------------------------------------------------------------------
+
+$0
