@@ -13,4 +13,4 @@ interface ${1:`(get-buffer-name)`} (input bit clk,
    
 endinterface : $1
 
-\`endif ${1:$(upcase yas-text)}_INTERFACE__SV
+\`endif // \`ifndef ${1:$(upcase yas-text)}_INTERFACE__SV
