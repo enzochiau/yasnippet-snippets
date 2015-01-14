@@ -70,21 +70,21 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
            \`uvm_info("get_and_drive", $sformatf("REQ = %s", req.convert2string()), UVM_MEDIUM)
 
            send_to_dut(req);
-           seq_item_port.item_done();
+           wait_for_respond(req);
         end
    endtask : get_and_drive
 
-   task send_to_dut(input $1_item tr);
+   task send_to_dut(input $1_item req);
       int i = 0;
 
-      \`uvm_info("send_to_dut", $sformatf("[subphase is %0s] item sent is: \n%0s",curr_phase.get_name(),tr.sprint()),UVM_HIGH)
+      \`uvm_info("send_to_dut", $sformatf("[subphase is %0s] item sent is: \n%0s",curr_phase.get_name(),req.sprint()),UVM_HIGH)
       $0
-      // while (i<tr.$1_size**2) begin
+      // while (i<req.$1_size**2) begin
       //    vif.din = '0;
       //    for (int j=0; j<cfg.num_of_pixel_per_trans; j++) begin
       //       vif.din = vif.din << cfg.pixel_width;
       //       for (int m=0; m<cfg.pixel_width; m++) 
-      //         vif.din[m] =  tr.data[i][m];
+      //         vif.din[m] =  req.data[i][m];
       //       i++;
       //    end
       //    vif.dinVld = 1;
@@ -95,8 +95,18 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
       // vif.dinVld = 0;
       // vif.we     = 0;
       // 
-      // cfg.wait_for_clock(tr.transmit_delay);
+      // cfg.wait_for_clock(req.transmit_delay);
    endtask : send_to_dut
+
+   task wait_for_respond(input $1_item req);
+      // $1_item rsp;
+      // 
+      // $cast(rsp, req.clone());
+      // rsp.set_id_info(req);
+      // 
+      // seq_item_port.put(rsp);
+      seq_item_port.item_done();
+   endtask : wait_for_respond
 
 endclass : $1_driver
 
