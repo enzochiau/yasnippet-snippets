@@ -3,7 +3,7 @@
 # key: uvc_test_base
 # group: UVC
 # --
-class ${1:first}_test extends $2base_test;
+class ${1:single}_test extends $2base_test;
    \`uvm_component_utils($1_test)
 
    function new(string name, uvm_component parent);
@@ -22,6 +22,7 @@ class ${1:first}_test extends $2base_test;
    endfunction : build_phase
 
    task run_phase(uvm_phase phase);
+      $0
       // vseq_SOF1_MCU1#(P_DIN_WIDTH) vseq = vseq_SOF1_MCU1#(P_DIN_WIDTH)::type_id::create("vseq");
 
       // phase.raise_objection(this);
