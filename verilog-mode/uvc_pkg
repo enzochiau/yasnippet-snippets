@@ -8,10 +8,11 @@
 \`define ${1:$(upcase yas-text)}__SV
 
 package ${1:`(get-buffer-name)`};
-   $0
+
    import uvm_pkg::*;
  \`include "uvm_macros.svh"
- 
+   $0 
+// \`include "${1:$(get-pkg-name yas-text)}_macros.svh"
 // \`include "${1:$(get-pkg-name yas-text)}_item.svh"
 // \`include "${1:$(get-pkg-name yas-text)}_config.svh"
 // \`include "${1:$(get-pkg-name yas-text)}_monitor.svh"
