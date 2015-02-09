@@ -20,29 +20,6 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_config extends uvm_object;
       super.new(name);
    endfunction
 
-   // Wait for signals
-   task wait_for_reset();
-      if (!vif.rst)
-        @(posedge vif.rst);
-   endtask : wait_for_reset
-   
-   task wait_for_reset_release();
-      if (vif.rst)
-        @(negedge vif.rst);
-   endtask : wait_for_reset_release
-   
-   task wait_for_clock(int n=1);
-      repeat(n)
-        @(posedge vif.clk);
-   endtask : wait_for_clock
-   
-   task reset_signals();
-      wait_for_reset();
-      // Drive signals to reset value
-      @(posedge vif.clk);
-      wait_for_reset_release();
-   endtask : reset_signals
-
 endclass : $1_config
 
 \`endif // $1_CONFIG__SV
