@@ -35,9 +35,9 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
 
    task run_phase(uvm_phase phase);
       \`uvm_info("run","RUNNING:",UVM_MEDIUM)
-      cfg.wait_for_reset();
-      cfg.reset_signals();
-      cfg.wait_for_reset_release();
+      vif.wait_for_reset();
+      vif.reset_signals();
+      vif.wait_for_reset_release();
       fork
          reset_signals();
          get_and_drive();
@@ -53,17 +53,17 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
 
    task reset_signals();
       forever begin
-         cfg.reset_signals();
+         vif.reset_signals();
       end
    endtask : reset_signals
 
    task get_and_drive();
       // Wait the first reset process finish
-      cfg.wait_for_reset_release();
+      vif.wait_for_reset_release();
       forever
         begin
            // Wait reset process finish
-           cfg.wait_for_reset_release();
+           vif.wait_for_reset_release();
 
            // Get and Drive
            seq_item_port.get_next_item(req);
@@ -75,27 +75,25 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
    endtask : get_and_drive
 
    task send_to_dut(input $1_item req);
-      int i = 0;
-
       \`uvm_info("send_to_dut", $sformatf("[subphase is %0s] item sent is: \n%0s",curr_phase.get_name(),req.sprint()),UVM_HIGH)
       $0
       // while (i<req.$1_size**2) begin
       //    vif.din = '0;
-      //    for (int j=0; j<cfg.num_of_pixel_per_trans; j++) begin
-      //       vif.din = vif.din << cfg.pixel_width;
-      //       for (int m=0; m<cfg.pixel_width; m++) 
+      //    for (int j=0; j<vif.num_of_pixel_per_trans; j++) begin
+      //       vif.din = vif.din << vif.pixel_width;
+      //       for (int m=0; m<vif.pixel_width; m++) 
       //         vif.din[m] =  req.data[i][m];
       //       i++;
       //    end
       //    vif.dinVld = 1;
       //    vif.we = 1;
-      //    cfg.wait_for_clock();
+      //    vif.wait_for_clock();
       // end
       // 
       // vif.dinVld = 0;
       // vif.we     = 0;
       // 
-      // cfg.wait_for_clock(req.transmit_delay);
+      // vif.wait_for_clock(req.transmit_delay);
    endtask : send_to_dut
 
    task wait_for_respond(input $1_item req);
