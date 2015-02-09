@@ -1,7 +1,12 @@
 # -*- mode: snippet -*-
+<<<<<<< HEAD
 # name: elisp source block
 # key: src_elisp
 # group: Source
+=======
+# name: elisp
+# key: elisp_
+>>>>>>> origin/master
 # --
 #+BEGIN_SRC emacs-lisp :tangle yes :results ${1:none}
 $0
