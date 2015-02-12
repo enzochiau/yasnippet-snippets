@@ -13,6 +13,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_agent extends uvm_agent;
    
    $1_sequencer  seqr;
    $1_driver     drv;
+   $1_monitor    mon:
    $1_config     cfg;
    $0
    
@@ -31,14 +32,16 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_agent extends uvm_agent;
          drv  =    $1_driver::type_id::create("drv",  this);
          seqr = $1_sequencer::type_id::create("seqr", this);
       end
+
+      mon = $1_monitor::type_id::create("mon",  this);
    endfunction : build_phase
    
    virtual function void connect_phase(uvm_phase phase);
       super.connect_phase(phase);
       
-      // if (cfg.is_active == UVM_ACTIVE) begin
-      //    drv.seq_item_port.connect(seqr.seq_item_export);
-      // end
+      if (cfg.is_active == UVM_ACTIVE) begin
+         drv.seq_item_port.connect(seqr.seq_item_export);
+      end
    endfunction : connect_phase
    
 endclass : $1_agent
