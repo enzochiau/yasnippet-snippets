@@ -13,10 +13,13 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
 
    $1_config cfg;
 
+   // uvm_analysis_port #($1_item) $1_port;
+   
    virtual $1_if vif;
    
    function new(string name, uvm_component parent);
       super.new(name,parent);
+      // $1_port = new("$1_port", this)
    endfunction : new
 
    virtual function void build_phase(uvm_phase phase);
@@ -104,6 +107,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_driver extends uvm_driver #($1_ite
       // 
       // seq_item_port.put(rsp);
       seq_item_port.item_done();
+      // $1_port.write(req);
    endtask : wait_for_respond
 
 endclass : $1_driver
