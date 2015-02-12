@@ -32,8 +32,8 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_env extends uvm_env;
 
    function void connect_phase(uvm_phase phase);
       // Connect slave0 monitor to scoreboard
-      // $2_agent_0.mon.sb_post.connect($1_scoreboard_0.$2_export);
-      // $3_agent_0.mon.sb_post.connect($1_scoreboard_0.$3_export);
+      // $2_agent_0.drv.$2_post.connect($1_scoreboard_0.$2_export);
+      // $3_agent_0.drv.$2_post.connect($1_scoreboard_0.$3_export);
       //      $1_env0.master0.monitor.item_collected_port.connect($1_scoreboard0.mst_item_collected_export);
       //      $1_env0.slave0.monitor.item_collected_port.connect($1_scoreboard0.slv_item_collected_export);
 
