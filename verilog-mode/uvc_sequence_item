@@ -12,6 +12,8 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
    \`uvm_object_utils($1_item)
 
    $0
+
+   static int unsigned item_id = 0;
    
    // rand int unsigned $1_size = 32;
    // rand int unsigned transmit_delay;
@@ -64,6 +66,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
       if (!$cast(rhs_, rhs))
         \`uvm_fatal("DO_COPY", "Type Mismatch")
       super.do_copy(rhs);
+      item_id = rhs_.item_id;
       // $1_size        = rhs_.$1_size;
       // transmit_delay  = rhs_.transmit_delay;
       // for(int i=0; i<$1_size**2; i++) begin
@@ -72,6 +75,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
    endfunction : do_copy
 
    function void do_record(uvm_recorder recorder);
+      \`uvm_record_int("item_id", item_id, $bits(item_id), UVM_UNSIGNED)
       // int unsigned data_width = $bits(data[0]);
       // \`uvm_record_int("transmit_delay", transmit_delay, $bits(transmit_delay), UVM_UNSIGNED)
       // \`uvm_record_int("$1_size",       $1_size,       $bits($1_size),       UVM_UNSIGNED)
