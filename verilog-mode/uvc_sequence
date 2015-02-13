@@ -22,6 +22,23 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends uvm_sequence($1_i
 
    task body();
 
+      req = $1_item::type_id::create("$1_item");
+      
+      start_item(req);
+
+      // Some modification for sequence item
+      
+      finish_item(req);
+
+      // Update sequence item ID
+      req.item_id++;
+
+      // Get response if necessary
+      // get_response(rsq);
+
+
+
+
       // pixel_item pixel;
       // ctu_item   ctu;
 
@@ -64,5 +81,6 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_sequence extends uvm_sequence($1_i
       //    up_sequencer.item_done();
       // end
    endtask : body
+   
 endclass : $1_sequence
 
