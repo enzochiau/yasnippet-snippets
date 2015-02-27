@@ -11,15 +11,8 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
 
    \`uvm_object_utils($1_item)
 
+   rand int unsigned transmit_delay;
    $0
-
-   static int unsigned item_id = 0;
-   
-   // rand int unsigned $1_size = 32;
-   // rand int unsigned transmit_delay;
-   // 
-   // rand int unsigned data[64*64];
-
 
    function new(string name="$1_item");
       super.new(name);
@@ -27,25 +20,23 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
 
    function string convert2string();
       string       s;
-      // int unsigned size = $1_size**2;
       
       s = super.convert2string();
 
-      // $sformat(s, "%s\n ${1:$(upcase yas-text)} Size      : %d", s, $1_size);
-      // $sformat(s, "%s\n Transmit Delay: %d", s, transmit_delay);
-      // 
-      // if (size > 8) begin
+      $sformat(s, "%s\n Transmit Delay: %d", s, transmit_delay);
+      
+      // if (data.size > 8) begin
       //    // Print maximum 8 data: 4 at beginning, 4 at the end
       //    for(int i=0; i<4; i++)
       //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
       // 
       //    $sformat(s, "%s\n ... ", s);
       // 
-      //    for(int i=size-4; i<size; i++)
+      //    for(int i=data.size-4; i<data.size; i++)
       //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
       // end
       // else begin
-      //    for (int i=0; i<size; i++)
+      //    for (int i=0; i<data.size; i++)
       //      $sformat(s, "%s\n Data[%4d]      : 0x%X", s, i, data[i]);
       // end // else: !if(size > 8)
       
@@ -66,22 +57,16 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
       if (!$cast(rhs_, rhs))
         \`uvm_fatal("DO_COPY", "Type Mismatch")
       super.do_copy(rhs);
-      item_id = rhs_.item_id;
-      // $1_size        = rhs_.$1_size;
-      // transmit_delay  = rhs_.transmit_delay;
-      // for(int i=0; i<$1_size**2; i++) begin
+      transmit_delay  = rhs_.transmit_delay;
+      // foreach(data[i])
       //    data[i]  = rhs_.data[i];
-      // end
    endfunction : do_copy
 
+
    function void do_record(uvm_recorder recorder);
-      \`uvm_record_int("item_id", item_id, $bits(item_id), UVM_UNSIGNED)
-      // int unsigned data_width = $bits(data[0]);
-      // \`uvm_record_int("transmit_delay", transmit_delay, $bits(transmit_delay), UVM_UNSIGNED)
-      // \`uvm_record_int("$1_size",       $1_size,       $bits($1_size),       UVM_UNSIGNED)
-      // for(int i=0; i<$1_size**2; i++) begin
-      //    \`uvm_record_int($sformatf("data[%d]", i), data[i], data_width, UVM_HEX)
-      // end
+      \`uvm_record_int("transmit_delay", transmit_delay, $bits(transmit_delay), UVM_UNSIGNED)
+      // foreach(data[i])
+      //    \`uvm_record_int($sformatf("data[%d]", i), data[i], $bits[data[i]], UVM_HEX)
    endfunction : do_record
 
 
@@ -98,9 +83,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item extends uvm_sequence_item;
       end
 
       compare_result = super.do_compare(rhs, comparer);
-      // compare_result = (compare_result==1) && ($1_size == rhs_.$1_size);
-      // 
-      // for(int i=0; i<$1_size**2; i++)
+      // foreach(data[i])
       //   compare_result  = (compare_result == 1) && (data[i] == rhs_.data[i]);
 
       return compare_result;
