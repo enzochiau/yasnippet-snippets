@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: main function
-# key: main
+# name: fixme dummy
+# key: efix
 # expand-env: ((yas-indent-line 'fixed))
 # --
-main :: IO ()
-main = do $0
+(error "FIXME: $0")
