@@ -49,14 +49,15 @@ return list element will be set to 'nil'"
     (dolist (p (split-string string ",\n*" t "\\s-*"))   ; split string and trim the result
       (let* ((tmp_param (split-string p "=" t "\\s-*"))  ; separate the parameter name and value
              (val (cdr tmp_param))
-             (name (cadr (split-string (car tmp_param) nil t))))
+             (name (car (last (split-string (car tmp_param) nil t)))))
           (add-to-list 'param (cons name val))))
     param))
 
 ;; (setq my-str "int P_DATA_WIDTH = 10,
 ;;               int P_ADDR_WIDTH = 12,
 ;;               int P_NO_VAL,
-;;               int P_DEPTH      = 8")
+;;               int P_DEPTH      = 8,
+;;               int unsigned P_UNSIGNED_DATA = \"OK\"")
 
 ;; (parse-parameters my-str)
 
