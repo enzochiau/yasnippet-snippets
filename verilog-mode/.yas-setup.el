@@ -41,25 +41,44 @@
 ;; (get-pkg-name "test_pkg")
 
 (defun parse-parameters (string)
-  "Parsing the parameter declaration string.
-Return list of (name . value) of parameter."
-  (interactive)
-  (let (param
-        var
-        name)
-    (dolist (p (split-string string ",\n*" t "\\s-*"))
-      (let* ((tmp_param (split-string p "=" t "\\s-*"))
-             (param_len  (length tmp_param)))
-        (if (> param_len 1)
-            (setq val (nth (1- param_len) tmp_param))
-          (setq val nil))
-        (setq name (cadr (split-string (nth 0 tmp_param) nil t)))
-        (add-to-list 'param (cons name val))))
+  "Parsing the parameter declaration STRING.
+Return list of (name . value) of parameter.  If parameter's
+default value is not defined in the original string, the value in
+return list element will be set to 'nil'"
+  (let (param)
+    (dolist (p (split-string string ",\n*" t "\\s-*"))   ; split string and trim the result
+      (let* ((tmp_param (split-string p "=" t "\\s-*"))  ; separate the parameter name and value
+             (val (cdr tmp_param))
+             (name (cadr (split-string (car tmp_param) nil t))))
+          (add-to-list 'param (cons name val))))
     param))
 
 ;; (setq my-str "int P_DATA_WIDTH = 10,
-;;                 int P_ADDR_WIDTH = 12,
-;;                 int P_NO_VAL,
-;;                 int P_DEPTH      = 8")
+;;               int P_ADDR_WIDTH = 12,
+;;               int P_NO_VAL,
+;;               int P_DEPTH      = 8")
 
 ;; (parse-parameters my-str)
+
+(defun make-parameter-assign (param)
+  "Create parameter assignment format string.
+For example, for parameter `P_D1', the return value should be `.P_D1(P_D1)'
+PARAM should be list of parameter name and value: (name . value)"
+  (let ((param-name (car param)))
+    (format ".%s(%s)" param-name param-name)))
+
+(defun make-parameter-assign-list (params &optional separator)
+  "Create the list of parameter assignments and separated by `separator`.
+PARAMS is the list of parameter name and value pairs.
+If SEPARATOR is nil, `, ' will be used as default separator."
+  (let ((sep (or separator
+                 ", ")))
+    (mapconcat 'parameter-assign params sep)))
+
+;; (make-parameter-assign (car (parse-parameters my-str)))
+;; (format "#(%s)" (make-parameter-assign-list (parse-parameters my-str)))
+;; (format "#(%s)" (make-parameter-assign-list (parse-parameters my-str) ",\n"))
+
+;; (cdr (list 1))
+;; (car (list "1" "2"))
+;; (nth 0 (list "1" "2"))
