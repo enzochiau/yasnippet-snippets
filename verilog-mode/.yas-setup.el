@@ -39,3 +39,27 @@
 ;; (get-pkg-name "test_abs_if_pkg")
 ;; (get-pkg-name "test_agent_pkg")
 ;; (get-pkg-name "test_pkg")
+
+(defun parse-parameters (string)
+  "Parsing the parameter declaration string.
+Return list of (name . value) of parameter."
+  (interactive)
+  (let (param
+        var
+        name)
+    (dolist (p (split-string string ",\n*" t "\\s-*"))
+      (let* ((tmp_param (split-string p "=" t "\\s-*"))
+             (param_len  (length tmp_param)))
+        (if (> param_len 1)
+            (setq val (nth (1- param_len) tmp_param))
+          (setq val nil))
+        (setq name (cadr (split-string (nth 0 tmp_param) nil t)))
+        (add-to-list 'param (cons name val))))
+    param))
+
+;; (setq my-str "int P_DATA_WIDTH = 10,
+;;                 int P_ADDR_WIDTH = 12,
+;;                 int P_NO_VAL,
+;;                 int P_DEPTH      = 8")
+
+;; (parse-parameters my-str)
