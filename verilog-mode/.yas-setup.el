@@ -45,18 +45,18 @@
 Return list of (name . value) of parameter.  If parameter's
 default value is not defined in the original string, the value in
 return list element will be set to 'nil'"
-  (let (param)
-    (dolist (p (split-string string ",\n*" t "\\s-*"))   ; split string and trim the result
+  (let (param (list ))
+    (dolist (p (split-string string ",[ \t\n]*" t "\\s-*"))   ; split string and trim the result
       (let* ((tmp_param (split-string p "=" t "\\s-*"))  ; separate the parameter name and value
              (val (cdr tmp_param))
              (name (car (last (split-string (car tmp_param) nil t)))))
           (add-to-list 'param (cons name val))))
-    param))
+    (reverse param)))
 
 ;; (setq my-str "int P_DATA_WIDTH = 10,
 ;;               int P_ADDR_WIDTH = 12,
 ;;               int P_NO_VAL,
-;;               int P_DEPTH      = 8,
+;;               int P_DEPTH      = 8, int P_SAME_LINE_NO_VALUE, int P_SAME_LINE_WITH_VALUE, 
 ;;               int unsigned P_UNSIGNED_DATA = \"OK\"")
 
 ;; (parse-parameters my-str)
@@ -78,7 +78,7 @@ If SEPARATOR is nil, `, ' will be used as default separator."
 
 ;; (make-parameter-assign (car (parse-parameters my-str)))
 ;; (format "#(%s)" (make-parameter-assign-list (parse-parameters my-str)))
-;; (format "#(%s)" (make-parameter-assign-list (parse-parameters my-str) ",\n"))
+;; (format "#(\n%s\n)" (make-parameter-assign-list (parse-parameters my-str) ",\n"))
 
 ;; (cdr (list 1))
 ;; (car (list "1" "2"))
