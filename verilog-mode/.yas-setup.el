@@ -29,11 +29,11 @@
 
 
 (defun get-pkg-name (name)
-  "Get the package name from string."
-  (setq s (substring-no-properties name))
-  ;; (string-match "\\(.*?\\)_\\(agent_pkg\\|agent\\|env\\|item\\|config\\|driver\\|monitor\\|scoreboard\\|abs_if\\|abs_if_pkg\\|if\\|abstract\\|sequencer\\|sequence\\|seq_lib\\|test_lib\\|c\\|pkg\\)" s)
-  (string-match (concat "\\(.*?\\)_" pkg-suffix) s)
-  (match-string 1 s))
+  "Get the package name from NAME."
+  (let ((s (substring-no-properties name)))
+    ;; (string-match "\\(.*?\\)_\\(agent_pkg\\|agent\\|env\\|item\\|config\\|driver\\|monitor\\|scoreboard\\|abs_if\\|abs_if_pkg\\|if\\|abstract\\|sequencer\\|sequence\\|seq_lib\\|test_lib\\|c\\|pkg\\)" s)
+    (string-match (concat "\\(.*?\\)_" pkg-suffix) s)
+    (match-string 1 s)))
 
 ;; (get-pkg-name "test_abs_if")
 ;; (get-pkg-name "test_abs_if_pkg")
