@@ -74,7 +74,7 @@ PARAMS is the list of parameter name and value pairs.
 If SEPARATOR is nil, `, ' will be used as default separator."
   (let ((sep (or separator
                  ", ")))
-    (mapconcat 'parameter-assign params sep)))
+    (mapconcat 'make-parameter-assign params sep)))
 
 ;; (make-parameter-assign (car (parse-parameters my-str)))
 ;; (format "#(%s)" (make-parameter-assign-list (parse-parameters my-str)))
