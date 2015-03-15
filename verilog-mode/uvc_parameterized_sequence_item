@@ -11,7 +11,9 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item#(
      ${2:parameters}
      ) extends uvm_sequence_item;
 
-   typedef $1_item#(${2:$(make-parameter-assign-list (parse-parameters yas-text))}) $1_item_t;
+   typedef $1_item#(
+                    ${2:$(make-parameter-assign-list (parse-parameters yas-text) ",\n")}
+                    ) $1_item_t;
 
    static int unsigned $1_item_id = 0;
    
@@ -19,8 +21,8 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item#(
    $0
 
    \`uvm_object_param_utils_begin($1_item_t)
-      `uvm_field_int(transmit_delay, UVM_DEFAULT|UVM_UNSIGNED)
-      `uvm_field_int($1_item_id, UVM_DEFAULT|UVM_NOCOMPARE|UVM_NO_COPY|UVM_UNSIGNED)
+      \`uvm_field_int(transmit_delay, UVM_DEFAULT|UVM_UNSIGNED)
+      \`uvm_field_int($1_item_id, UVM_DEFAULT|UVM_NOCOMPARE|UVM_NO_COPY|UVM_UNSIGNED)
    \`uvm_object_utils_end
    
    function new(string name = $sformatf("$1_item_%0d", $1_item_id));
