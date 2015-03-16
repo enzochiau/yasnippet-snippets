@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: El-get Bundle Github
+# key: egbgh
+# --
+(el-get-bundle ${1:package-name}
+  :type github
+  :pkgname "${2:author}/$1"
+  :description "$0"
+  :website "https://github.com/$2/$1")
