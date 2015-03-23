@@ -16,7 +16,7 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item#(
                     ) $1_item_t;
 
    static int unsigned g_$1_item_id = 0;
-   int id;
+   int unsigned id;
    
    rand int unsigned transmit_delay;
    $0
@@ -26,9 +26,9 @@ class ${1:`(get-pkg-name (get-buffer-name))`}_item#(
       // \`uvm_field_int($1_item_id, UVM_DEFAULT|UVM_NOCOMPARE|UVM_NO_COPY|UVM_UNSIGNED)
    \`uvm_object_utils_end
    
-   function new(string name = $sformatf("$1_item_%0d", g_$1_item_id));
+   function new(string name = $sformatf("$1_item_%0d", ++g_$1_item_id));
       super.new(name);
-      id = g_$1_item_id++;
+      id = g_$1_item_id;
    endfunction : new
 
    // function string convert2string();
