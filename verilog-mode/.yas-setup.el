@@ -21,11 +21,12 @@
                 "seq_lib"
                 "test_lib"
                 "agent"
-                "agent_pkg"
+                ;; "agent_pkg"
                 "pkg"
                 "abs_if"
                 "if"
-                "abs_if_pkg") nil))
+                "abs_if_pkg"
+                ) nil))
 
 
 (defun get-pkg-name (name)
